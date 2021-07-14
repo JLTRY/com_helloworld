@@ -66,7 +66,7 @@ class HelloWorldModelHelloWorld extends JModelItem
 	 * Get the message
 	 * @return object The message to be displayed to the user
 	 */
-	public function getItem($pk=NULL)
+	public function getItem()
 	{
 		if (!isset($this->item)) 
 		{
