@@ -54,7 +54,14 @@ class HelloWorldViewHelloWorld extends JViewLegacy
 		parent::display($tpl);
 
 		// Set the document
-		$this->setDocument();
+		$isNew = ($this->item->id == 0);
+		$document = JFactory::getDocument();
+		$document->setTitle($isNew ? JText::_('COM_HELLOWORLD_HELLOWORLD_CREATING')
+		                           : JText::_('COM_HELLOWORLD_HELLOWORLD_EDITING'));
+		$document->addScript(JURI::root() . $this->script);
+		$document->addScript(JURI::root() . "/administrator/components/com_helloworld"
+		                                  . "/views/helloworld/submitbutton.js");
+		JText::script('COM_HELLOWORLD_HELLOWORLD_ERROR_UNACCEPTABLE');
 	}
 
 	/**
@@ -112,20 +119,5 @@ class HelloWorldViewHelloWorld extends JViewLegacy
 			JToolBarHelper::cancel('helloworld.cancel', 'JTOOLBAR_CLOSE');
 		}
 	}
-	/**
-	 * Method to set up the document properties
-	 *
-	 * @return void
-	 */
-	protected function setDocument() 
-	{
-		$isNew = ($this->item->id == 0);
-		$document = JFactory::getDocument();
-		$document->setTitle($isNew ? JText::_('COM_HELLOWORLD_HELLOWORLD_CREATING')
-		                           : JText::_('COM_HELLOWORLD_HELLOWORLD_EDITING'));
-		$document->addScript(JURI::root() . $this->script);
-		$document->addScript(JURI::root() . "/administrator/components/com_helloworld"
-		                                  . "/views/helloworld/submitbutton.js");
-		JText::script('COM_HELLOWORLD_HELLOWORLD_ERROR_UNACCEPTABLE');
-	}
+	
 }
